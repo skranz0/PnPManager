@@ -6,11 +6,11 @@ import kotlinx.android.synthetic.main.activity_mein_monster.*
 
 class MeinMonster : AppCompatActivity() {
 
-    val mobvals = getSharedPreferences("skranz.pnpmanager.mobvals.prefs", 0)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mein_monster)
+
+        val mobvals = getSharedPreferences("skranz.pnpmanager.mobvals.prefs", 0)
 
         val name = if (mobvals.contains("name"))
             mobvals.getString("name", null) else "Monster"
