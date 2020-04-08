@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PnP Manager</string>
+    <string name="mob_Name">Name</string>
+    <string name="mob_Life">Lebenspunkte</string>
+    <string name="mob_Armor">Rüstung</string>
+    <string name="add">Hinzufügen</string>
+</resources>
