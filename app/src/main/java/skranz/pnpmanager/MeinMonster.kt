@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import kotlinx.android.synthetic.main.activity_mein_monster.*
 
 class MeinMonster : AppCompatActivity() {
@@ -36,13 +37,13 @@ class MeinMonster : AppCompatActivity() {
         val attackDialog = AlertDialog.Builder(this)
         val inflater = layoutInflater
         val dialogLayout = inflater.inflate(R.layout.alert_dialog_with_edit_text, null)
-        val inputDamage = dialogLayout.findViewById<EditText>(R.id.editText).text.toString()
 
         with(attackDialog) {
             setTitle("$name angreifen")
             setView(dialogLayout)
             setNegativeButton("Abbruch") { _: DialogInterface, _: Int -> }
-            setPositiveButton("Okay") { _: DialogInterface, _: Int -> damageTaken = inputDamage.toInt() }
+            setPositiveButton("Okay") { _: DialogInterface,
+                _: Int -> hit(dialogLayout.findViewById<EditText>(R.id.editText).text.toString().toInt()) }
             show()
         }
     }
@@ -59,8 +60,8 @@ class MeinMonster : AppCompatActivity() {
     }
 
     private fun hit(damage: Int) {
-        if( health + armor >= damageTaken) {
-            health -= damageTaken - armor
+        if( health + armor >= damage) {
+            health -= damage - armor
         } else {
             health = 0
         }
