@@ -4,4 +4,6 @@
     <string name="mob_Armor">Armor</string>
     <string name="add">Add</string>
     <string name="mob_Name">Name</string>
+    <string name="addDamage">Attack</string>
+    <string name="Damage">Damage</string>
 </resources>

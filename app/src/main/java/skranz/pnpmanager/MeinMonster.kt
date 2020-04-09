@@ -7,18 +7,39 @@ import kotlinx.android.synthetic.main.activity_mein_monster.*
 
 class MeinMonster : AppCompatActivity() {
 
+    private var name: String = ""
+    private var health: Int = 0
+    private var armor: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mein_monster)
 
         //val mobvals = getSharedPreferences("skranz.pnpmanager.mobvals.prefs", 0)
 
-        val name = intent.getStringExtra("Name")
-        val health = intent.getIntExtra("Health", -2)
-        val armor = intent.getIntExtra("Armor", -2)
+        name = intent.getStringExtra("Name")
+        health = intent.getIntExtra("Health", -2)
+        armor = intent.getIntExtra("Armor", -2)
 
+        print()
+
+        addDamage.setOnClickListener {
+            //TODO go to enter damage activity
+            val enterDamage = Intent(this, EnterDamage::class.java)
+            startActivity(enterDamage)
+        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        health -= (intent.getIntExtra("Damage", 0) - this.armor)
+        print()
+    }
+
+    private fun print() {
         try {
-            tvName.text = "Name: $name"
+            tvName.text = "$name"
             tvHealth.text = "LeP: $health"
             tvArmor.text = "RS: $armor"
         } catch (ex:Exception) {
@@ -26,4 +47,5 @@ class MeinMonster : AppCompatActivity() {
             startActivity(goBack)
         }
     }
+
 }
