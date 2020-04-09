@@ -5,4 +5,6 @@
     <string name="mob_Life">Lebenspunkte</string>
     <string name="mob_Armor">Rüstung</string>
     <string name="add">Hinzufügen</string>
+    <string name="addDamage">Angreifen</string>
+    <string name="Damage">Schaden</string>
 </resources>
