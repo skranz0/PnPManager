@@ -52,5 +52,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="36dp"
         app:srcCompat="@drawable/icons8_sword_48"
-        android:focusable="true" />
+        android:focusable="true" /> <!-- Sword icon by Icons8 -->
 </androidx.constraintlayout.widget.ConstraintLayout>

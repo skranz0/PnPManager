@@ -1,7 +1,9 @@
 package skranz.pnpmanager
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_mein_monster.*
 
@@ -16,7 +18,6 @@ class MeinMonster : AppCompatActivity() {
         setContentView(R.layout.activity_mein_monster)
 
         //val mobvals = getSharedPreferences("skranz.pnpmanager.mobvals.prefs", 0)
-
         name = intent.getStringExtra("Name")
         health = intent.getIntExtra("Health", -2)
         armor = intent.getIntExtra("Armor", -2)
@@ -24,28 +25,40 @@ class MeinMonster : AppCompatActivity() {
         print()
 
         addDamage.setOnClickListener {
-            //TODO go to enter damage activity
-            val enterDamage = Intent(this, EnterDamage::class.java)
-            startActivity(enterDamage)
+            addDamage()
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    private fun addDamage() {
+        val attackDialog = AlertDialog.Builder(this)
 
-        health -= (intent.getIntExtra("Damage", 0) - this.armor)
-        print()
+        with(attackDialog) {
+            setTitle("$name angreifen")
+            setMessage("5 Schaden verursachen")
+            setNegativeButton("Abbruch") { _: DialogInterface, _: Int -> }
+            setPositiveButton("Okay") { _: DialogInterface, _: Int -> hit(5) }
+            show()
+        }
     }
 
     private fun print() {
         try {
-            tvName.text = "$name"
+            tvName.text = name
             tvHealth.text = "LeP: $health"
             tvArmor.text = "RS: $armor"
         } catch (ex:Exception) {
             val goBack = Intent(this, MainActivity::class.java)
             startActivity(goBack)
         }
+    }
+
+    private fun hit(damage: Int) {
+        if( health + armor >= damage) {
+            health -= damage - armor
+        } else {
+            health = 0
+        }
+        print()
     }
 
 }

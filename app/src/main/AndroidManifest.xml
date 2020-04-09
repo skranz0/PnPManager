@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".EnterDamage"
-            android:parentActivityName=".MeinMonster"></activity>
-        <activity
             android:name=".MeinMonster"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
