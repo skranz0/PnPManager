@@ -44,6 +44,7 @@ class MeinMonster : AppCompatActivity() {
                 _: Int -> hit(dialogLayout.findViewById<EditText>(R.id.editText).text.toString().toInt()) }
             show()
         }
+        if (health == 0) die() //this doesn't work :(
     }
 
     @SuppressLint("SetTextI18n")
@@ -59,12 +60,21 @@ class MeinMonster : AppCompatActivity() {
     }
 
     private fun hit(damage: Int) {
-        if( health + armor >= damage) {
-            health -= damage - armor
-        } else {
-            health = 0
+        if(armor <= damage) {
+            if( health + armor >= damage) {
+                health -= damage - armor
+            } else {
+                health = 0
+            }
         }
         print()
     }
 
+    private fun die() {
+        val deathPopUp = AlertDialog.Builder(this)
+        with(deathPopUp) {
+            setMessage("$name ist gestorben")
+            setPositiveButton("Okay") { _: DialogInterface, _: Int -> }
+        }
+    }
 }
