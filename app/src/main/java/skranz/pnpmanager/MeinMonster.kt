@@ -1,12 +1,12 @@
 package skranz.pnpmanager
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import kotlinx.android.synthetic.main.activity_mein_monster.*
 
 class MeinMonster : AppCompatActivity() {
@@ -14,8 +14,6 @@ class MeinMonster : AppCompatActivity() {
     private var name: String = ""
     private var health: Int = 0
     private var armor: Int = 0
-
-    private var damageTaken = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +46,7 @@ class MeinMonster : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun print() {
         try {
             tvName.text = name
