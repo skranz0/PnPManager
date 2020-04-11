@@ -39,7 +39,7 @@ class MeinMonster : AppCompatActivity() {
             setView(dialogLayout)
             setNegativeButton("Abbruch") { _: DialogInterface, _: Int -> }
             setPositiveButton("Okay") { _: DialogInterface,
-                _: Int -> hit(dialogLayout.findViewById<EditText>(R.id.editText).text.toString().toInt()) }
+                _: Int -> hit(dialogLayout.findViewById<EditText>(R.id.tvName).text.toString().toInt()) }
             show()
         }
     }
