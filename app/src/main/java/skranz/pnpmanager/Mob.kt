@@ -1,14 +1,14 @@
 package skranz.pnpmanager
 
 class Mob(name: String, health: Int, armor: Int) {
-    private val name: String
+    val name: String
         get() = field
-    private var health: Int = 0
+    var health: Int = 0
         get() = field
         set(value) {
             field = value
         }
-    private val armor: Int
+    val armor: Int
         get() = field
 
     init { //make sure given values make sense

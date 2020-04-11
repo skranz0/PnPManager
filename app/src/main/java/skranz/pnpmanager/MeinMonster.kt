@@ -11,19 +11,17 @@ import kotlinx.android.synthetic.main.activity_mein_monster.*
 
 class MeinMonster : AppCompatActivity() {
 
-    private var name: String = ""
-    private var health: Int = 0
-    private var armor: Int = 0
+    private lateinit var monster: Mob
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mein_monster)
 
-        //val mobvals = getSharedPreferences("skranz.pnpmanager.mobvals.prefs", 0)
-        name = intent.getStringExtra("Name")
-        health = intent.getIntExtra("Health", -2)
-        armor = intent.getIntExtra("Armor", -2)
-
+        monster = Mob(
+            intent.getStringExtra("Name"),
+            intent.getIntExtra("Health", 20),
+            intent.getIntExtra("Armor", 0)
+        )
         print()
 
         addDamage.setOnClickListener {
@@ -37,7 +35,7 @@ class MeinMonster : AppCompatActivity() {
         val dialogLayout = inflater.inflate(R.layout.alert_dialog_with_edit_text, null)
 
         with(attackDialog) {
-            setTitle("$name angreifen")
+            setTitle("${monster.name} angreifen")
             setView(dialogLayout)
             setNegativeButton("Abbruch") { _: DialogInterface, _: Int -> }
             setPositiveButton("Okay") { _: DialogInterface,
@@ -49,9 +47,9 @@ class MeinMonster : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun print() {
         try {
-            tvName.text = name
-            tvHealth.text = "LeP: $health"
-            tvArmor.text = "RS: $armor"
+            tvName.text = monster.name
+            tvHealth.text = "LeP: ${monster.health}"
+            tvArmor.text = "RS: ${monster.armor}"
         } catch (ex:Exception) {
             val goBack = Intent(this, MainActivity::class.java)
             startActivity(goBack)
@@ -59,10 +57,10 @@ class MeinMonster : AppCompatActivity() {
     }
 
     private fun hit(damage: Int) {
-        if( health + armor >= damage) {
-            health -= damage - armor
+        if( monster.health + monster.armor >= damage) {
+            monster.health -= damage - monster.armor
         } else {
-            health = 0
+            monster.health = 0
         }
         print()
     }
